@@ -1,17 +1,40 @@
 <div class="header">
 	Management Dashboard
 </div>
-<ng-container *ngFor="let departments of displayArray;">
-  <mat-card>
-    Department
-  </mat-card>
-	<ng-container *ngFor="let department of departments; let deptNo = index;">
-		<pre>
-	{{department | json}}
-  </pre>
-		<div *ngFor="let manager of department?.manager; let managerNo = index;">
-			<button (click)="addDev(deptNo, managerNo)">Add Developer</button>
-			Hey, {{managerNo}}
-		</div>
-	</ng-container>
+<button class="dept" (click)="addDept()">Add Department</button>
+<ng-container *ngFor="let department of finalDepartments; let deptNo = index;">
+	<mat-card>
+		Department {{deptNo + 1}}
+		<button (click)="addManager(department, deptNo)">Add Manager</button>
+		<ng-container *ngFor="let manager of department?.manager; let managerNo = index;">
+			<mat-card>
+				Manager {{managerNo + 1}}
+				<button (click)="addInternalTeam('developer', deptNo, managerNo)">Add Developer</button>
+				<button (click)="addInternalTeam('qaTester', deptNo, managerNo)">Add QA Tester</button>
+				<button (click)="addInternalTeam('manager', deptNo, managerNo)">Add Manager</button>
+
+				<div *ngFor="let developer of manager?.developer; let dev = index">
+					<p>
+						<span matBadge={{dev+1}} matBadgeOverlap="false">Developer</span>
+					</p>
+				</div>
+				<div *ngFor="let qa of manager?.qaTester; let qat = index">
+					<p>
+						<span matBadge={{qat+1}} matBadgeOverlap="false">Developer</span>
+					</p>
+				</div>
+				<div *ngFor="let manager of manager?.manager; let mg = index">
+					<p>
+						<span matBadge={{mg+1}} matBadgeOverlap="false">Developer</span>
+					</p>
+				</div>
+			</mat-card>
+		</ng-container>
+	</mat-card>
 </ng-container>
+
+<mat-card>
+	<pre>
+  {{finalDepartments | json}}
+  </pre>
+</mat-card>

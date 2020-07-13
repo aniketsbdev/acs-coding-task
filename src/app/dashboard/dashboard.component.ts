@@ -24,41 +24,53 @@ export class DashboardComponent implements OnInit {
   department: any = {
     manager: [
       {
-        developer: [this.developer],
-        qaTester: [this.qaTester],
-        manager: [this.manager]
+        developer: [],
+        qaTester: [],
+        manager: []
       }
     ]
   };
-  finalDepartments: any[] = [this.department];
-  departmentForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    // this.departmentForm = this.formBuilder.group({
-    //   departmentNumber: [],
-    //   managers: this.formBuilder.array([this.addManagerGroup()])
-    // });
-  }
+  finalDepartments: any[] = [];
+  constructor() {}
 
   ngOnInit() {
-    this.displayArray.push(this.finalDepartments);
+    this.finalDepartments.push();
   }
 
-  // private addManagerGroup(): FormGroup {
-  //   return this.formBuilder.group({
-  //     manager: [],
-  //     developers: [],
-  //     state: [],
-  //     contacts: this.formBuilder.array([])
-  //   });
-  // }
-
-  addDev(deptNo, managerNo) {
-    for (let dept of this.finalDepartments) {
-      
+  addInternalTeam(type, deptNo, managerNo) {
+    if (type == "developer") {
+      this.finalDepartments[deptNo]["manager"][managerNo][type].push(
+        this.developer
+      );
+    } else if (type == "qaTester") {
+      this.finalDepartments[deptNo]["manager"][managerNo]["qaTester"].push(
+        this.qaTester
+      );
+    } else if (type == "manager") {
+      this.finalDepartments[deptNo]["manager"][managerNo]["manager"].push(
+        this.manager
+      );
     }
   }
 
-  addDept(departmentNumber: any) {
-    this.finalDepartments.push(this.department);
+  addDept() {
+    this.finalDepartments.push({
+      manager: [
+        {
+          developer: [],
+          qaTester: [],
+          manager: []
+        }
+      ]
+    });
+  }
+
+  addManager(department, deptNo) {
+    console.log(this.finalDepartments[deptNo]);
+    this.finalDepartments[deptNo]["manager"].push({
+      developer: [],
+      qaTester: [],
+      manager: []
+    });
   }
 }
