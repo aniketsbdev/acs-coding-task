@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
@@ -7,8 +7,6 @@ import { FormBuilder, FormGroup } from "@angular/forms";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  displayArray: any[] = [];
-
   developer: any = {
     name: "Developer",
     cost: 1000
@@ -26,7 +24,8 @@ export class DashboardComponent implements OnInit {
       {
         developer: [],
         qaTester: [],
-        manager: []
+        manager: [],
+        teamAmount: 0
       }
     ]
   };
@@ -72,5 +71,22 @@ export class DashboardComponent implements OnInit {
       qaTester: [],
       manager: []
     });
+  }
+
+  getInternalCost(manager, deptNo) {
+    console.log(manager);
+    let total = this.manager.cost;
+    for (const member of Object.keys(manager)) {
+      if (member == "developer") {
+        total += manager[member].length * this.developer.cost;
+      } else if (member == "qaTester") {
+        total += manager[member].length * this.qaTester.cost;
+      } else if (member == "manager") {
+        total += manager[member].length * this.manager.cost;
+      }
+    }
+    this.finalDepartments[deptNo]["manager"]["teamAmount"] = total;
+    console.log("Hey", this.finalDepartments[deptNo]["manager"]);
+    return total;
   }
 }
