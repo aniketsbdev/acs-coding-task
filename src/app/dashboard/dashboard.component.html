@@ -1,22 +1,17 @@
 <div class="header">
 	Management Dashboard
 </div>
-<code>
-  {{displayArray}}
-</code>
 <ng-container *ngFor="let departments of displayArray;">
-	<pre>
-    {{departments}}
-  </pre>
-	<ng-container *ngFor="let department of departments; let deptNo as index">
+  <mat-card>
+    Department
+  </mat-card>
+	<ng-container *ngFor="let department of departments; let deptNo = index;">
 		<pre>
 	{{department | json}}
   </pre>
-		<ng-container *ngFor="let manager of department.manager; let manager as index">
-			<pre>
-	{{manager | json}}
-  </pre>
-			<button (click)="addDept(deptNo)">Add developer</button>
-		</ng-container>
+		<div *ngFor="let manager of department?.manager; let managerNo = index;">
+			<button (click)="addDev(deptNo, managerNo)">Add Developer</button>
+			Hey, {{managerNo}}
+		</div>
 	</ng-container>
 </ng-container>

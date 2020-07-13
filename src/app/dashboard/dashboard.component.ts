@@ -8,9 +8,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 })
 export class DashboardComponent implements OnInit {
   displayArray: any[] = [];
-  department: any = {
-    manager: [{ developer: [], qaTester: [], manager: [] }]
-  };
+
   developer: any = {
     name: "Developer",
     cost: 1000
@@ -22,6 +20,15 @@ export class DashboardComponent implements OnInit {
   manager: any = {
     name: "Manager",
     cost: 300
+  };
+  department: any = {
+    manager: [
+      {
+        developer: [this.developer],
+        qaTester: [this.qaTester],
+        manager: [this.manager]
+      }
+    ]
   };
   finalDepartments: any[] = [this.department];
   departmentForm: FormGroup;
@@ -44,6 +51,12 @@ export class DashboardComponent implements OnInit {
   //     contacts: this.formBuilder.array([])
   //   });
   // }
+
+  addDev(deptNo, managerNo) {
+    for (let dept of this.finalDepartments) {
+      
+    }
+  }
 
   addDept(departmentNumber: any) {
     this.finalDepartments.push(this.department);
