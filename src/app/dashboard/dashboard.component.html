@@ -1,38 +1,41 @@
 <div class="header">
 	Management Dashboard
 </div>
-<button class="dept" (click)="addDept()">Add Department</button>
-<ng-container *ngFor="let department of finalDepartments; let deptNo = index;">
-	<mat-card>
-		Department {{deptNo + 1}}
-		<button (click)="addManager(department, deptNo)">Add Manager</button>
-		<ng-container *ngFor="let manager of department?.manager; let managerNo = index;">
-			<mat-card>
-				Manager {{managerNo + 1}}
-				<button (click)="addInternalTeam('developer', deptNo, managerNo)">Add Developer</button>
-				<button (click)="addInternalTeam('qaTester', deptNo, managerNo)">Add QA Tester</button>
-				<button (click)="addInternalTeam('manager', deptNo, managerNo)">Add Manager</button>
+<br>
+<button (click)="addDept()">Add Department</button>
+<br>
+<br>
+<mat-grid-list cols="2" rowHeight="1:0.7">
+<mat-grid-tile *ngFor="let department of finalDepartments; let deptNo = index;">
+<mat-card>
+	Department {{deptNo + 1}}
+  <br>
+	<button (click)="addManager(department, deptNo)">Add Manager</button>
+	<br>
+	<ng-container *ngFor="let manager of department?.manager; let managerNo = index;">
+		Manager {{managerNo + 1}}
+    <br>
+		<mat-card>
+			<button (click)="addInternalTeam('developer', deptNo, managerNo)">Add Developer</button>
+			<button (click)="addInternalTeam('qaTester', deptNo, managerNo)">Add QA Tester</button>
+			<button (click)="addInternalTeam('manager', deptNo, managerNo)">Add Manager</button>
 
-				<div *ngFor="let developer of manager?.developer; let dev = index">
-					<p>
-						<span matBadge={{dev+1}} matBadgeOverlap="false">Developer</span>
-					</p>
-				</div>
-				<div *ngFor="let qa of manager?.qaTester; let qat = index">
-					<p>
-						<span matBadge={{qat+1}} matBadgeOverlap="false">Developer</span>
-					</p>
-				</div>
-				<div *ngFor="let manager of manager?.manager; let mg = index">
-					<p>
-						<span matBadge={{mg+1}} matBadgeOverlap="false">Developer</span>
-					</p>
-				</div>
-			</mat-card>
-		</ng-container>
-	</mat-card>
-</ng-container>
-
+			<div *ngFor="let developer of manager?.developer; let dev = index">
+				Developer {{dev + 1}}
+			</div>
+			<div *ngFor="let qa of manager?.qaTester; let qat = index">
+				QA Tester {{qat + 1}}
+			</div>
+			<div *ngFor="let manager of manager?.manager; let mg = index">
+				Manager {{mg + 1}}
+			</div>
+			<hr />
+			Internal Team Total :
+		</mat-card>
+	</ng-container>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
 <mat-card>
 	<pre>
   {{finalDepartments | json}}

@@ -6,7 +6,8 @@
 }
 
 button {
-  display: inline-block;
+  float: right;
+  display: block;
   padding: 0.3em 1.2em;
   margin:0 0.3em 0.3em 0;
   border-radius:2em;
@@ -18,8 +19,39 @@ button {
   text-align:center;
 }
 
+.dept {
+  float: right;
+}
+
+mat-grid-tile {
+  overflow: scroll;
+}
+
 mat-card {
-  -webkit-box-shadow: -8px 4px 21px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: -8px 4px 21px -6px rgba(0,0,0,0.75);
-  box-shadow: -8px 4px 21px -6px rgba(0,0,0,0.75);
+  max-width: 650px;
+  margin: 10px 10px 10px 10px;
+  -webkit-box-shadow: -8px 4px 16px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: -8px 4px 16px -6px rgba(0,0,0,0.75);
+  box-shadow: -8px 4px 16px -6px rgba(0,0,0,0.75);
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(36, 151, 151)  !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555  !important;
 }
