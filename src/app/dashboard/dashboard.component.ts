@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-dashboard",
@@ -7,6 +6,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
+  htmlStr: String = "<p> 300 <p>";
   developer: any = {
     name: "Developer",
     cost: 1000
@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
         manager: [],
         teamAmount: 0
       }
-    ]
+    ],
+    departmentAmount: 0
   };
   finalDepartments: any[] = [];
   constructor() {}
@@ -41,14 +42,26 @@ export class DashboardComponent implements OnInit {
       this.finalDepartments[deptNo]["manager"][managerNo][type].push(
         this.developer
       );
+      this.finalDepartments[deptNo]["manager"][
+        managerNo
+      ].teamAmount += this.developer.cost;
     } else if (type == "qaTester") {
       this.finalDepartments[deptNo]["manager"][managerNo]["qaTester"].push(
         this.qaTester
       );
+      this.finalDepartments[deptNo]["manager"][
+        managerNo
+      ].teamAmount += this.qaTester.cost;
     } else if (type == "manager") {
       this.finalDepartments[deptNo]["manager"][managerNo]["manager"].push(
         this.manager
       );
+      this.finalDepartments[deptNo]["manager"][
+        managerNo
+      ].teamAmount += this.manager.cost;
+    }
+    for (let dept of this.finalDepartments) {
+      
     }
   }
 
@@ -58,7 +71,8 @@ export class DashboardComponent implements OnInit {
         {
           developer: [],
           qaTester: [],
-          manager: []
+          manager: [],
+          teamAmount: 300
         }
       ]
     });
@@ -69,7 +83,8 @@ export class DashboardComponent implements OnInit {
     this.finalDepartments[deptNo]["manager"].push({
       developer: [],
       qaTester: [],
-      manager: []
+      manager: [],
+      teamAmount: 300
     });
   }
 
