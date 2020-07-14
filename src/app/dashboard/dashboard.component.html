@@ -33,10 +33,9 @@
 					Internal Team Total : $ {{finalDepartments[deptNo].manager[managerNo].teamAmount | json}}
 				</mat-card>
 			</ng-container>
-		Department Total : $ {{finalDepartments[deptNo] | json}}
+			Department Total : $ {{finalDepartments[deptNo]["departmentAmount"]}}
 		</mat-card>
 	</mat-grid-tile>
-
 </mat-grid-list>
 <mat-card>
 	<pre>

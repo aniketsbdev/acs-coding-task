@@ -6,7 +6,6 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  htmlStr: String = "<p> 300 <p>";
   developer: any = {
     name: "Developer",
     cost: 1000
@@ -45,6 +44,7 @@ export class DashboardComponent implements OnInit {
       this.finalDepartments[deptNo]["manager"][
         managerNo
       ].teamAmount += this.developer.cost;
+      this.finalDepartments[deptNo]["departmentAmount"] += this.developer.cost;
     } else if (type == "qaTester") {
       this.finalDepartments[deptNo]["manager"][managerNo]["qaTester"].push(
         this.qaTester
@@ -52,6 +52,7 @@ export class DashboardComponent implements OnInit {
       this.finalDepartments[deptNo]["manager"][
         managerNo
       ].teamAmount += this.qaTester.cost;
+      this.finalDepartments[deptNo]["departmentAmount"] += this.qaTester.cost;
     } else if (type == "manager") {
       this.finalDepartments[deptNo]["manager"][managerNo]["manager"].push(
         this.manager
@@ -59,9 +60,7 @@ export class DashboardComponent implements OnInit {
       this.finalDepartments[deptNo]["manager"][
         managerNo
       ].teamAmount += this.manager.cost;
-    }
-    for (let dept of this.finalDepartments) {
-      
+      this.finalDepartments[deptNo]["departmentAmount"] += this.manager.cost;
     }
   }
 
@@ -72,9 +71,10 @@ export class DashboardComponent implements OnInit {
           developer: [],
           qaTester: [],
           manager: [],
-          teamAmount: 300
+          teamAmount: this.manager.cost
         }
-      ]
+      ],
+      departmentAmount: this.manager.cost
     });
   }
 
@@ -84,24 +84,8 @@ export class DashboardComponent implements OnInit {
       developer: [],
       qaTester: [],
       manager: [],
-      teamAmount: 300
+      teamAmount: this.manager.cost
     });
-  }
-
-  getInternalCost(manager, deptNo) {
-    console.log(manager);
-    let total = this.manager.cost;
-    for (const member of Object.keys(manager)) {
-      if (member == "developer") {
-        total += manager[member].length * this.developer.cost;
-      } else if (member == "qaTester") {
-        total += manager[member].length * this.qaTester.cost;
-      } else if (member == "manager") {
-        total += manager[member].length * this.manager.cost;
-      }
-    }
-    this.finalDepartments[deptNo]["manager"]["teamAmount"] = total;
-    console.log("Hey", this.finalDepartments[deptNo]["manager"]);
-    return total;
+    this.finalDepartments[deptNo]["departmentAmount"] += this.manager.cost;
   }
 }
